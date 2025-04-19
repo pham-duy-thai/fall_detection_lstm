@@ -4,15 +4,15 @@ import torch
 from ultralytics import YOLO
 from lstm_model import LSTMClassifier
 
-# تنظیمات اولیه
+# === Config ===
 model_path = "lstm_fall_model.pth"
-video_path = "Videos/input.mp4"
-use_webcam = False  # True برای استفاده از وب‌کم
+video_path = "videos/input.mp4"  # اسم پوشه به صورت lowercase باشه
+use_webcam = True               # True = استفاده از وب‌کم
 window_size = 30
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# مدل‌ها
+# === Load Models ===
 pose_model = YOLO("yolov8n-pose.pt")
 model = LSTMClassifier(input_dim=2, hidden_dim=64, output_dim=2)
 model.load_state_dict(torch.load(model_path, map_location=device))
@@ -22,10 +22,12 @@ model.eval()
 sequence = []
 cap = cv2.VideoCapture(0 if use_webcam else video_path)
 
+print("🔄 Running fall detection... Press 'q' to exit.")
+
 def extract_features(kp):
     try:
-        s = kp[5]
-        h = kp[11]
+        s = kp[5]  # Shoulder
+        h = kp[11] # Hip
         dx = h[0] - s[0]
         dy = h[1] - s[1]
         angle = np.degrees(np.arctan2(dy, dx))
@@ -42,7 +44,9 @@ while cap.isOpened():
     results = pose_model(frame)
     annotated = results[0].plot()
 
-    for kp in results[0].keypoints.xy:
+    # فقط با اولین فرد در تصویر کار کن (نتیجه‌ی مطمئن‌تر)
+    if results[0].keypoints is not None:
+        kp = results[0].keypoints.xy[0]  # فقط نفر اول
         feat = extract_features(kp.cpu().numpy())
         sequence.append(feat)
 

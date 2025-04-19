@@ -1,3 +1,8 @@
 /venv
 /photos
 /Videos
+/keypoints.npy
+/labels.npy
+/__pycache__
+/lstm_fall_model.pth
+/sequences.npy
