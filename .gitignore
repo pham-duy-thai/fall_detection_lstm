@@ -6,3 +6,7 @@
 /__pycache__
 /lstm_fall_model.pth
 /sequences.npy
+/data
+/train_video
+/keypoints_fall.npy
+/keypoints_nofall.npy

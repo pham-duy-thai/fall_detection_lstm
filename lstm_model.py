@@ -8,5 +8,4 @@ class LSTMClassifier(nn.Module):
 
     def forward(self, x):
         _, (hn, _) = self.lstm(x)
-        out = self.fc(hn[-1])
-        return out
+        return self.fc(hn[-1])
