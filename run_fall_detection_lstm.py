@@ -4,29 +4,25 @@ import torch
 from ultralytics import YOLO
 from lstm_model import LSTMClassifier
 
-# تنظیمات اصلی
+# تنظیمات
 model_path = "lstm_fall_model.pth"
-video_path = "videos/nofall_18.mp4"  # یا مسیر ویدیو تست
-use_webcam = False                # True برای تست با وب‌کم
+video_path = "videos_test/test_fall5.mp4"  # اگر use_webcam=False باشه از این استفاده میشه
+use_webcam = True
 window_size = 40
 
-# انتخاب device
+# دستگاه اجرا
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("⚙️ Running on device:", device)
 
 # بارگذاری مدل‌ها
-print("📦 Loading YOLO pose model and LSTM classifier...")
 pose_model = YOLO("yolov8n-pose.pt")
-model = LSTMClassifier(input_dim=3, hidden_dim=64, output_dim=2)
+model = LSTMClassifier(input_dim=3, hidden_dim=64, output_dim=2).to(device)
 model.load_state_dict(torch.load(model_path, map_location=device))
-model.to(device)
 model.eval()
-print("✅ Models loaded.")
 
-# ویدیو یا وب‌کم
-cap = cv2.VideoCapture(0 if use_webcam else video_path)
 sequence = []
+cap = cv2.VideoCapture(0 if use_webcam else video_path)
 
-# تابع استخراج ویژگی‌ها از keypoints
 def extract_features(kp):
     try:
         nose = kp[0]
@@ -45,12 +41,10 @@ def extract_features(kp):
     except:
         return [90, 0, 0]
 
-# شروع پردازش فریم‌ها
-print("▶️ Starting detection...")
+# اجرای پردازش
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
-        print("❌ End of video or cannot read frame.")
         break
 
     results = pose_model(frame)
@@ -67,17 +61,14 @@ while cap.isOpened():
             with torch.no_grad():
                 out = model(input_tensor)
                 pred = torch.argmax(out, dim=1).item()
-
             if pred == 1:
                 cv2.putText(annotated, "FALL DETECTED", (40, 60), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
             else:
-                cv2.putText(annotated, "No Fall", (40, 60), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
+                cv2.putText(annotated, "NO FALL", (40, 60), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
 
     cv2.imshow("Fall Detection", annotated)
     if cv2.waitKey(1) & 0xFF == ord('q'):
-        print("⏹ Stopped by user.")
         break
 
 cap.release()
 cv2.destroyAllWindows()
-print("✅ Detection finished.")

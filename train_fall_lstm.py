@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader, Dataset
 from sklearn.model_selection import train_test_split
 from lstm_model import LSTMClassifier
 
-# ✅ تعریف دیتاست سفارشی
+# کلاس دیتاست
 class FallDataset(Dataset):
     def __init__(self, X, y):
         self.X = torch.tensor(X, dtype=torch.float32)
@@ -17,62 +17,60 @@ class FallDataset(Dataset):
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
 
-# ✅ بارگذاری داده‌ها
+# بارگذاری داده‌ها
 print("📥 Loading sequences and labels...")
 X = np.load("sequences.npy")
 y = np.load("labels.npy")
 
-# ✅ تقسیم داده‌ها
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 train_loader = DataLoader(FallDataset(X_train, y_train), batch_size=16, shuffle=True)
 
-# ✅ تعریف مدل
-model = LSTMClassifier(input_dim=3, hidden_dim=64, output_dim=2)
+# تعیین device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("⚙️ Using device:", device)
+
+# تعریف مدل و پارامترها
+model = LSTMClassifier(input_dim=3, hidden_dim=64, output_dim=2).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-# ✅ آموزش مدل
+# آموزش
 print("🚀 Training started...\n")
-for epoch in range(1, 21):
+for epoch in range(20):
     model.train()
-    epoch_loss = 0
+    correct, total = 0, 0
     for X_batch, y_batch in train_loader:
+        X_batch = X_batch.to(device)
+        y_batch = y_batch.to(device)
+
         optimizer.zero_grad()
         output = model(X_batch)
         loss = criterion(output, y_batch)
         loss.backward()
         optimizer.step()
-        epoch_loss += loss.item()
 
-    avg_loss = epoch_loss / len(train_loader)
+        pred = torch.argmax(output, dim=1)
+        correct += (pred == y_batch).sum().item()
+        total += y_batch.size(0)
 
-    # ✅ دقت روی داده آموزش
-    model.eval()
-    correct, total = 0, 0
-    with torch.no_grad():
-        for X_batch, y_batch in train_loader:
-            output = model(X_batch)
-            pred = torch.argmax(output, dim=1)
-            correct += (pred == y_batch).sum().item()
-            total += y_batch.size(0)
     acc = correct / total * 100
-    print(f"📚 Epoch {epoch}/20 | Loss: {avg_loss:.4f} | Train Accuracy: {acc:.2f}%")
+    print(f"📚 Epoch {epoch+1}/20 | Loss: {loss.item():.4f} | Train Accuracy: {acc:.2f}%")
 
-# ✅ دقت روی داده تست
+# تست
 model.eval()
 correct, total = 0, 0
 for i in range(len(X_test)):
-    input_tensor = torch.tensor(X_test[i:i+1], dtype=torch.float32)
-    label = y_test[i]
+    input_tensor = torch.tensor(X_test[i:i+1], dtype=torch.float32).to(device)
+    label = torch.tensor(y_test[i]).to(device)
     output = model(input_tensor)
-    pred = torch.argmax(output, dim=1).item()
+    pred = torch.argmax(output, dim=1)
     if pred == label:
         correct += 1
     total += 1
 
-test_acc = correct / total * 100
-print(f"\n📊 Final Test Accuracy: {test_acc:.2f}%")
+acc = correct / total * 100
+print(f"\n📊 Final Test Accuracy: {acc:.2f}%")
 
-# ✅ ذخیره مدل
 torch.save(model.state_dict(), "lstm_fall_model.pth")
 print("✅ Model saved to lstm_fall_model.pth")
