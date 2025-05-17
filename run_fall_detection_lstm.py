@@ -6,7 +6,7 @@ from lstm_model import LSTMClassifier
 
 # تنظیمات
 model_path = "lstm_fall_model.pth"
-video_path = "videos_test/test_fall5.mp4"  # اگر use_webcam=False باشه از این استفاده میشه
+video_path = "videos_test/test_fall1.mp4"  # اگر use_webcam=False باشه از این استفاده میشه
 use_webcam = True
 window_size = 40
 

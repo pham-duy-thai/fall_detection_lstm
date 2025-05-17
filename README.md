@@ -1,114 +1,105 @@
 # Fall Detection using YOLOv8 and LSTM
 
-This project is focused on detecting human falls in videos or real-time streams using a combination of **pose estimation** (YOLOv8n-pose) and **temporal modeling** (LSTM).
+## Project Overview  
+This project aims to detect human falls from videos.  
+It uses **YOLOv8n-Pose** to extract 17 keypoints of the human body and an **LSTM model** to analyze the sequence of movements and classify them as either **Fall** or **No Fall (Normal Activity)**.
 
 ---
 
-## 📌 Overview
+## Technologies Used  
 
-- Extracts **17 human keypoints** using Ultralytics YOLOv8n-pose.
-- Converts keypoints into meaningful time-based features.
-- Uses an LSTM neural network to classify behavior as either `FALL` or `NO FALL`.
-- Supports both **live webcam feed** and **MP4 video files**.
-- Lightweight and works on **CPU** and **GPU (CUDA)** environments.
+- Python 3.13  
+- PyTorch  
+- Ultralytics YOLOv8  
+- OpenCV  
+- NumPy  
+- Scikit-learn  
 
 ---
 
-## 📁 Folder Structure
+## Project Workflow  
 
-fall_detection_lstm/
-│
-├── data/ # Extracted keypoints (.npy)
-│ ├── keypoints_fall_.npy
-│ └── keypoints_nofall_.npy
-├── videos/ # Input videos (fall_1.mp4, nofall_1.mp4, ...)
-├── lstm_model.py # LSTM network definition
-├── make_multiple_videos.py # Optional - Converts frame sequences to videos
-├── extract_keypoints_batch.py # Batch keypoint extraction using YOLOv8
-├── generate_sequences.py # Feature engineering and labeling
-├── train_fall_lstm.py # Model training and saving
-├── run_fall_detection_lstm.py # Real-time or MP4-based inference
-├── yolov8n-pose.pt # YOLOv8 pose weights (must download)
-├── requirements.txt # Required Python libraries
-└── README.md # Project documentation
+1. **(Optional) Create videos from image frames**  
+   If you have frame-by-frame images, use `make_multiple_videos.py` to generate `.mp4` videos.
 
+2. **Extract pose keypoints from videos**  
+   Run `extract_keypoints_batch.py` to extract body keypoints from videos inside the `videos/` folder. Output files (`.npy`) are saved to the `data/` folder.
 
+3. **Generate sequence data (features)**  
+   Use `generate_sequences.py` to extract features (e.g., torso angle, head distance) and create `sequences.npy` and `labels.npy`.
 
+4. **Train LSTM model**  
+   Run `train_fall_lstm.py` to train the LSTM using the generated sequences.  
+   The trained model will be saved as `lstm_fall_model.pth`.
 
-## ⚙️ Installation
+5. **Run the model (live or on test video)**  
+   Execute `run_fall_detection_lstm.py`.  
+   - Set `use_webcam = True` for real-time detection  
+   - Set `use_webcam = False` to test on an `.mp4` file
 
-Install Python packages using pip:
+---
 
-```bash
-pip install -r requirements.txt
+## Folder Structure and File Naming  
 
+- Training and test videos must be placed inside the `videos/` folder.  
+- Video names must start with either `fall_` or `nofall_` (e.g., `fall_1.mp4`, `nofall_3.mp4`)  
+- The output `.npy` files will be automatically saved inside the `data/` folder (no need to create manually).  
+- Trained model is saved as `lstm_fall_model.pth`
 
+---
 
-Make sure to manually download YOLOv8n-pose weights:
+## Model Features  
 
-Download yolov8n-pose.pt
+- Automatically runs on **GPU** if available, otherwise falls back to **CPU**  
+- Supports both real-time (live webcam) and offline (`.mp4`) detection  
+- Input features include torso angle, torso length, and head-to-hip distance  
 
-Or use this command to auto-download:
+---
 
-from ultralytics import YOLO
-YOLO("yolov8n-pose.pt")
+## Final Accuracy  
 
+Using approximately **70 training videos**, the model achieved an accuracy of about **84%**.  
+This accuracy can be improved by increasing the number and diversity of training videos  
+(e.g., different camera angles, lighting conditions, or real-world falls).
 
-🚀 How to Run the Project
+---
 
-Step 1 – [Optional] Convert image frames to videos
+## Resume Training (Optional)  
 
-python make_multiple_videos.py
+If `lstm_fall_model.pth` already exists, you can **resume training** by loading it into `train_fall_lstm.py`.  
+This allows you to **continue training** the model instead of starting from scratch.
 
-Step 2 – Extract pose keypoints from videos
+---
 
-python extract_keypoints_batch.py
+## Compatibility Notes  
 
-Step 3 – Generate features and labels
+- Python 3.13 was used for development and testing  
+- Works on other Python versions (e.g., 3.10/3.11) with compatible libraries  
+- Torch automatically detects CUDA and runs on GPU if available  
+- The project avoids hard dependencies on system hardware and runs on CPU by default
 
-python generate_sequences.py
+---
 
-Step 4 – Train the LSTM model
+## Additional Notes  
 
-python train_fall_lstm.py
+- Code includes readable emoji-style messages to visually indicate progress and errors (e.g., ✅, ❌)  
+- The system is suitable for use in **elderly care**, **smart security**, or **healthcare applications**
 
-Step 5 – Run fall detection
+---
 
-use_webcam = True  # or False to use mp4
+## Final Words  
 
-video_path = "videos/fall_1.mp4"
+This fall detection system provides a solid foundation and performs reliably using only body keypoints and temporal features.  
+With more video data and augmentation, the accuracy can be improved further.
 
+---
 
-Then run:
+## Project Info  
 
-python run_fall_detection_lstm.py
+Project by: Mohammad Mahdi Salehi
 
+Supervisor: Seyyed Mostafa Hashemi Motlagh
 
-
-🎯 Accuracy and Performance
-Current accuracy: ~84%
-
-Accuracy improves significantly by:
-
-Increasing number of training videos
-
-Using more diverse camera angles and subjects
-
-Increasing video resolution and lighting quality
-
-
-
-
-💡 Notes
-The model automatically detects CUDA (GPU) if available, otherwise runs on CPU.
-
-Messages and logs are enhanced with emojis to improve visual clarity (✅, ❌, 🔄).
-
-The LSTM model is saved as lstm_fall_model.pth, so retraining is optional unless updating the dataset.
-
-
-Project Title: Fall Detection using YOLOv8 and LSTM
-Author: Mohammad Mahdi Salehi
 Date: May 2025
 
 
