@@ -137,7 +137,8 @@ def cpu_load_percent() -> float | None:
     total = kernel_delta + user_delta
     return round(max(0.0, min(100.0, (total - idle_delta) / total * 100)), 1) if total else 0.0
 live_sequences: dict[str, list[list[float]]] = {}
-live_model_votes: dict[str, deque[float]] = {}
+live_model_votes: dict[str, deque[tuple[float, float]]] = {}
+live_geometric_fall_since: dict[str, float] = {}
 live_postprocessors: dict[str, FallPostProcessor] = {}
 last_fall_alert: dict[str, datetime] = {}
 PRIMARY_PERSON_CONFIDENCE = 0.20
@@ -716,12 +717,17 @@ def extract_features(kp):
         return [90, 0, 0]
 
 
-def model_fall_confirmed(votes: deque[float], fall_probability: float | None,
-                         threshold: float = 0.60, required: int = 3) -> bool:
-    """Require repeated LSTM fall evidence to avoid single-window spikes."""
+def model_fall_confirmed(votes: deque[tuple[float, float]], fall_probability: float | None,
+                         timestamp_s: float, threshold: float = 0.60,
+                         required: int = 3, sample_interval_s: float = 0.25,
+                         minimum_span_s: float = 0.50) -> bool:
+    """Require sustained LSTM evidence sampled over time, not adjacent frames."""
     if fall_probability is not None and np.isfinite(fall_probability):
-        votes.append(float(fall_probability))
-    return sum(score >= threshold for score in votes) >= required
+        if not votes or timestamp_s - votes[-1][0] >= sample_interval_s:
+            votes.append((timestamp_s, float(fall_probability)))
+    positive = [sample for sample in votes if sample[1] >= threshold]
+    return (len(positive) >= required and
+            positive[-1][0] - positive[0][0] >= minimum_span_s)
 
 
 def validate_upper_body_keypoints(keypoints, confidence, threshold=0.35):
@@ -861,6 +867,7 @@ async def analyze_camera_frame(camera_id: str, file: UploadFile = File(...), aut
     if primary_pose is None:
         live_sequences[camera_id] = []
         live_model_votes.pop(camera_id, None)
+        live_geometric_fall_since.pop(camera_id, None)
         live_postprocessors.setdefault(camera_id, configured_postprocessor()).update(None, time.monotonic())
         ended = datetime.now(timezone.utc)
         elapsed = max((ended - started).total_seconds(), 1e-6)
@@ -898,15 +905,22 @@ async def analyze_camera_frame(camera_id: str, file: UploadFile = File(...), aut
         pred = int(torch.argmax(probs).item())
         model_confidence = float(probs[pred].item())
         fall_probability = float(probs[1].item())
-    model_confirmed = model_fall_confirmed(votes, fall_probability)
+    now_monotonic = time.monotonic()
+    model_confirmed = model_fall_confirmed(votes, fall_probability, now_monotonic)
     processor = live_postprocessors.setdefault(camera_id, configured_postprocessor())
     processor.lying_duration_s = min(30.0, max(1.0, float(ai_settings.get("fall_hold_seconds", 3))))
     processor.velocity_threshold = max(0.35, 1.35 - min(0.95, max(0.2, float(ai_settings.get("sensitivity", 0.55)))))
-    state = processor.update(keypoints, time.monotonic())
+    state = processor.update(keypoints, now_monotonic)
     # Geometry confirms a rapid descent followed by a sustained horizontal
     # pose; the temporal classifier must independently support that decision.
-    if state == "FALL" and not model_confirmed:
-        state = "BENDING"
+    if state == "FALL":
+        fall_started = live_geometric_fall_since.setdefault(camera_id, now_monotonic)
+        # A disagreeing classifier may delay a strong geometric fall, but it
+        # cannot suppress an unchanged fall posture indefinitely.
+        if not model_confirmed and now_monotonic - fall_started < 2.0:
+            state = "BENDING"
+    else:
+        live_geometric_fall_since.pop(camera_id, None)
     if state == "NORMAL" and len(live_sequences[camera_id]) < 40:
         state = "WARMING_UP"
     event_id = None
@@ -954,7 +968,8 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
         Path(video_file).unlink(missing_ok=True)
         raise HTTPException(500, "Unable to create annotated video")
     sequence, predictions = [], []
-    model_votes: deque[float] = deque(maxlen=5)
+    model_votes: deque[tuple[float, float]] = deque(maxlen=5)
+    geometric_fall_since: float | None = None
     postprocessor = configured_postprocessor()
     frame_index = 0
     pose_frame_count = 0
@@ -983,6 +998,7 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
                     continue
                 pose_frame_count += 1
                 sequence.append(extract_features(keypoints))
+                sequence = sequence[-40:]
                 fall_probability = None
                 if len(sequence) >= 40:
                     window = torch.tensor(np.array(sequence[-40:]), dtype=torch.float32).unsqueeze(0).to(device)
@@ -991,10 +1007,16 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
                     pred = int(torch.argmax(probs).item())
                     last_confidence = float(probs[pred].item())
                     fall_probability = float(probs[1].item())
-                model_confirmed = model_fall_confirmed(model_votes, fall_probability)
-                last_state = postprocessor.update(keypoints, frame_index / fps)
-                if last_state == "FALL" and not model_confirmed:
-                    last_state = "BENDING"
+                timestamp_s = frame_index / fps
+                model_confirmed = model_fall_confirmed(model_votes, fall_probability, timestamp_s)
+                last_state = postprocessor.update(keypoints, timestamp_s)
+                if last_state == "FALL":
+                    if geometric_fall_since is None:
+                        geometric_fall_since = timestamp_s
+                    if not model_confirmed and timestamp_s - geometric_fall_since < 2.0:
+                        last_state = "BENDING"
+                else:
+                    geometric_fall_since = None
                 predictions.append({"frame": frame_index, "time": round(frame_index / fps, 2),
                                     "state": last_state, "confidence": last_confidence})
                 if last_state == "BENDING":
@@ -1003,6 +1025,7 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
             else:
                 sequence.clear()
                 model_votes.clear()
+                geometric_fall_since = None
                 postprocessor.update(None, frame_index / fps)
                 last_state = "NO_PERSON"
                 predictions.append({"frame": frame_index, "time": round(frame_index / fps, 2),
