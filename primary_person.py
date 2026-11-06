@@ -41,6 +41,7 @@ def select_primary_person(
     person_class_id: int | None = 0,
     center_region: tuple[float, float, float, float] = (0.15, 0.10, 0.85, 0.92),
     min_area_ratio: float = 0.015,
+    center_filter: Any = None,
     confidences: Any = None,
     class_ids: Any = None,
 ) -> PrimaryPerson | None:
@@ -101,6 +102,8 @@ def select_primary_person(
         center_x, center_y = (x1 + x2) / 2, (y1 + y2) / 2
         if not (roi_x1 <= center_x <= roi_x2 and roi_y1 <= center_y <= roi_y2):
             continue
+        if center_filter is not None and not center_filter((center_x / frame_width, center_y / frame_height)):
+            continue
         # Largest area wins. Confidence then distance to ROI center break ties.
         distance = ((center_x - (roi_x1 + roi_x2) / 2) / frame_width) ** 2 + \
                    ((center_y - (roi_y1 + roi_y2) / 2) / frame_height) ** 2
@@ -120,6 +123,7 @@ def infer_primary_person_pose(
     selection_confidence: float = 0.20,
     person_class_id: int = 0,
     center_region: tuple[float, float, float, float] = (0.15, 0.10, 0.85, 0.92),
+    center_filter: Any = None,
     crop_padding: float = 0.12,
 ) -> PrimaryPose | None:
     """Detect first, then run pose estimation only on the selected person's crop.
@@ -136,6 +140,7 @@ def infer_primary_person_pose(
         confidence_threshold=selection_confidence,
         person_class_id=person_class_id,
         center_region=center_region,
+        center_filter=center_filter,
     )
     if detection is None:
         return None

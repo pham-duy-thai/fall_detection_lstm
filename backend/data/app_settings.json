@@ -1,7 +1,7 @@
 {
   "ai": {
     "fall_hold_seconds": 3,
-    "sensitivity": 0.5,
+    "sensitivity": 0.95,
     "schedule_enabled": false,
     "schedule_start": "00:00",
     "schedule_end": "23:59",

@@ -21,12 +21,12 @@ class PoseMetrics:
 
 
 class FallPostProcessor:
-    """Classify a time-ordered keypoint stream as NORMAL, BENDING, or FALL.
+    """Evaluate geometric posture and motion evidence over time.
 
     Velocity is positive when the torso center moves down in image coordinates.
     The threshold uses body-heights/second, so it is independent of resolution.
-    A fall requires both a recent fast downward movement and a horizontal pose
-    held for ``lying_duration_s``. Slow bending and quick recovery map to BENDING.
+    A horizontal pose alone is not a fall. A fall requires a sustained horizontal
+    pose plus a recent fast descent or meaningful joint movement after lying down.
     """
 
     def __init__(
@@ -54,6 +54,9 @@ class FallPostProcessor:
         self.keypoint_history: deque[tuple[float, list[list[float]]]] = deque(maxlen=self.history_size)
         self.motion_history: deque[tuple[float, float, float]] = deque(maxlen=self.history_size)
         self.horizontal_since_s: float | None = None
+        self.horizontal_motion_seen = False
+        self.last_horizontal_motion = False
+        self.last_recent_fast_drop = False
         self.last_fast_drop_s: float | None = None
         self.fall_latched = False
         self.last_metrics: PoseMetrics | None = None
@@ -135,11 +138,51 @@ class FallPostProcessor:
         acceleration = (late_velocity - early_velocity) / half_window / max(1.0, body_height)
         return velocity, normalized_velocity, acceleration
 
-    def update(self, keypoints: Iterable[Iterable[float]] | None, timestamp_s: float) -> str:
-        """Consume one frame and return NORMAL, BENDING, FALL, or NO_PERSON."""
+    def _keypoints_moving(self, current: list[list[float]], timestamp_s: float,
+                          body_height: float) -> bool:
+        """Detect meaningful joint movement over a short interval, ignoring pose jitter."""
+        previous = next((sample for sample in reversed(self.keypoint_history)
+                         if 0.25 <= timestamp_s - sample[0] <= 1.25), None)
+        if previous is None:
+            return False
+        prior_points = previous[1]
+        pairs = []
+        for index, point in enumerate(current[:17]):
+            if index >= len(prior_points):
+                break
+            old = prior_points[index]
+            if len(point) < 2 or len(old) < 2:
+                continue
+            if (len(point) >= 3 and point[2] < 0.20) or (len(old) >= 3 and old[2] < 0.20):
+                continue
+            if not all(math.isfinite(float(value)) for value in (*point[:2], *old[:2])):
+                continue
+            if ((abs(float(point[0])) < 1e-6 and abs(float(point[1])) < 1e-6) or
+                    (abs(float(old[0])) < 1e-6 and abs(float(old[1])) < 1e-6)):
+                continue
+            pairs.append((float(point[0]), float(point[1]), float(old[0]), float(old[1])))
+        if len(pairs) < 3:
+            return False
+        xs = [item[0] for item in pairs]
+        ys = [item[1] for item in pairs]
+        extent = math.hypot(max(xs) - min(xs), max(ys) - min(ys))
+        scale = max(1.0, body_height, extent)
+        displacements = [math.hypot(x - old_x, y - old_y) / scale
+                         for x, y, old_x, old_y in pairs]
+        return sum(value >= 0.07 for value in displacements) >= 2 or max(displacements, default=0.0) >= 0.16
+
+    def update(self, keypoints: Iterable[Iterable[float]] | None, timestamp_s: float,
+               confidence: Iterable[float] | None = None) -> str:
+        """Consume a frame and classify posture, motion, and fall state."""
         if keypoints is None:
             self.reset()
             return "NO_PERSON"
+        keypoints = [list(point) for point in keypoints]
+        if confidence is not None:
+            scores = list(confidence)
+            for index, point in enumerate(keypoints):
+                if len(point) < 3 and index < len(scores):
+                    point.append(float(scores[index]))
 
         measured = self._pose_metrics(keypoints)
         if measured is None:
@@ -152,9 +195,12 @@ class FallPostProcessor:
             self.keypoint_history.clear()
             self.motion_history.clear()
             self.horizontal_since_s = None
+            self.horizontal_motion_seen = False
             self.last_fast_drop_s = None
             self.fall_latched = False
-        self.keypoint_history.append((timestamp_s, [list(p) for p in keypoints]))
+        motion_points = [list(map(float, point[:3])) for point in keypoints]
+        keypoint_motion = self._keypoints_moving(motion_points, timestamp_s, body_height)
+        self.keypoint_history.append((timestamp_s, motion_points))
         self.motion_history.append((timestamp_s, center_y, body_height))
         downward_velocity, normalized_downward_speed, normalized_acceleration = self._recent_vertical_motion(
             timestamp_s, body_height
@@ -164,17 +210,30 @@ class FallPostProcessor:
 
         is_horizontal = box_ratio >= self.aspect_ratio_threshold
         if is_horizontal:
+            entered_horizontal = self.horizontal_since_s is None
             if self.horizontal_since_s is None:
                 self.horizontal_since_s = timestamp_s
+                self.horizontal_motion_seen = False
+            # Ignore motion used to get into the horizontal posture. Only
+            # activity after the person is already horizontal is corroboration.
+            self.last_horizontal_motion = not entered_horizontal and keypoint_motion
+            if self.last_horizontal_motion:
+                self.horizontal_motion_seen = True
         else:
             self.horizontal_since_s = None
+            self.horizontal_motion_seen = False
+            self.last_horizontal_motion = False
             if trunk_tilt < self.bending_angle_degrees / 2:
                 self.last_fast_drop_s = None
                 self.fall_latched = False
 
         horizontal_duration = (timestamp_s - self.horizontal_since_s) if self.horizontal_since_s is not None else 0.0
         recent_fast_drop = self.last_fast_drop_s is not None and 0 <= timestamp_s - self.last_fast_drop_s <= self.fall_window_s
-        confirmed_fall = is_horizontal and horizontal_duration >= self.lying_duration_s and recent_fast_drop
+        self.last_recent_fast_drop = recent_fast_drop
+        # Being horizontal by itself is not a fall. Confirm after a fast drop
+        # or after meaningful joint activity while the person remains horizontal.
+        confirmed_fall = (is_horizontal and horizontal_duration >= self.lying_duration_s and
+                          (recent_fast_drop or self.horizontal_motion_seen))
         if confirmed_fall:
             self.fall_latched = True
 
@@ -185,7 +244,9 @@ class FallPostProcessor:
 
         if self.fall_latched and (is_horizontal or trunk_tilt >= self.bending_angle_degrees / 2):
             return "FALL"
-        if is_horizontal or trunk_tilt >= self.bending_angle_degrees:
+        if is_horizontal:
+            return "LYING"
+        if trunk_tilt >= self.bending_angle_degrees:
             return "BENDING"
         return "NORMAL"
 
@@ -195,8 +256,9 @@ class FallPostProcessor:
             return "FALL"
         if self.last_metrics is None:
             return "INVALID_FRAME"
-        if (self.last_metrics.box_ratio >= self.aspect_ratio_threshold or
-                self.last_metrics.trunk_tilt_degrees >= self.bending_angle_degrees):
+        if self.last_metrics.box_ratio >= self.aspect_ratio_threshold:
+            return "LYING"
+        if self.last_metrics.trunk_tilt_degrees >= self.bending_angle_degrees:
             return "BENDING"
         return "NORMAL"
 

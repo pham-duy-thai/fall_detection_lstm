@@ -48,5 +48,31 @@
       ]
     },
     "created_at": "2026-11-06T02:34:36.110425+00:00"
+  },
+  {
+    "action": "settings.updated",
+    "detail": {
+      "keys": [
+        "ai"
+      ]
+    },
+    "created_at": "2026-11-06T02:52:10.879402+00:00"
+  },
+  {
+    "action": "settings.updated",
+    "detail": {
+      "keys": [
+        "ai"
+      ]
+    },
+    "created_at": "2026-11-06T03:07:27.840384+00:00"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "user_id": "3a1b38130861aac040e45d64088071be",
+      "email": "admin@gmail.com"
+    },
+    "created_at": "2026-11-06T04:16:56.792790+00:00"
   }
 ]

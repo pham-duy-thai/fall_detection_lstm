@@ -136,10 +136,7 @@ def cpu_load_percent() -> float | None:
     idle_delta, kernel_delta, user_delta = (now - before for now, before in zip(current, previous))
     total = kernel_delta + user_delta
     return round(max(0.0, min(100.0, (total - idle_delta) / total * 100)), 1) if total else 0.0
-live_sequences: dict[str, list[list[float]]] = {}
-live_model_votes: dict[str, deque[tuple[float, float]]] = {}
-live_geometric_fall_since: dict[str, float] = {}
-live_postprocessors: dict[str, FallPostProcessor] = {}
+live_decision_streams: dict[str, "FallDecisionStream"] = {}
 last_fall_alert: dict[str, datetime] = {}
 PRIMARY_PERSON_CONFIDENCE = 0.20
 PRIMARY_PERSON_CENTER_REGION = (0.15, 0.10, 0.85, 0.92)
@@ -547,7 +544,48 @@ def configured_postprocessor() -> FallPostProcessor:
     settings = read_app_settings().get("ai", {})
     hold = min(30.0, max(1.0, float(settings.get("fall_hold_seconds", 3))))
     sensitivity = min(0.95, max(0.2, float(settings.get("sensitivity", 0.55))))
+    # Higher verification sensitivity requests a longer stable observation
+    # before alerting, while lowering the descent-speed threshold.
+    hold = min(30.0, hold + sensitivity * 2.0)
     return FallPostProcessor(lying_duration_s=hold, velocity_threshold=max(0.35, 1.35 - sensitivity))
+
+def detection_profile(settings: dict) -> tuple[float, float, int, float]:
+    base_hold = min(30.0, max(1.0, float(settings.get("fall_hold_seconds", 3))))
+    sensitivity = min(0.95, max(0.2, float(settings.get("sensitivity", 0.55))))
+    effective_hold = min(30.0, base_hold + sensitivity * 2.0)
+    speed_threshold = max(0.35, 1.35 - sensitivity)
+    model_votes = min(5, 3 + round(sensitivity * 2))
+    model_span_s = 0.5 + sensitivity
+    return effective_hold, speed_threshold, model_votes, model_span_s
+
+def point_in_polygon(point: tuple[float, float], polygon: list[list[float]]) -> bool:
+    x, y = point
+    inside = False
+    j = len(polygon) - 1
+    for i, vertex in enumerate(polygon):
+        xi, yi = float(vertex[0]), float(vertex[1])
+        xj, yj = float(polygon[j][0]), float(polygon[j][1])
+        if ((yi > y) != (yj > y)) and x < (xj - xi) * (y - yi) / ((yj - yi) or 1e-9) + xi:
+            inside = not inside
+        j = i
+    return inside
+
+def person_in_configured_zone(camera_id: str, bbox_xyxy, frame_shape, settings: dict) -> bool:
+    zones = settings.get("camera_zones", {})
+    zone = zones.get(camera_id) if isinstance(zones, dict) else None
+    if not isinstance(zone, dict):
+        return True
+    try:
+        polygon = [(float(point[0]), float(point[1])) for point in zone.get("points", [])]
+    except (TypeError, ValueError, IndexError):
+        return True
+    if len(polygon) < 3 or not all(np.isfinite(point).all() and 0 <= point[0] <= 1 and 0 <= point[1] <= 1 for point in polygon):
+        return True
+    frame_h, frame_w = frame_shape[:2]
+    x1, y1, x2, y2 = map(float, bbox_xyxy)
+    anchor = ((x1 + x2) / (2 * frame_w), (y1 + y2) / (2 * frame_h))
+    inside = point_in_polygon(anchor, polygon)
+    return inside if zone.get("mode") == "include" else not inside
 
 def schedule_is_active(settings: dict) -> bool:
     if not settings.get("schedule_enabled"):
@@ -717,17 +755,167 @@ def extract_features(kp):
         return [90, 0, 0]
 
 
-def model_fall_confirmed(votes: deque[tuple[float, float]], fall_probability: float | None,
-                         timestamp_s: float, threshold: float = 0.60,
-                         required: int = 3, sample_interval_s: float = 0.25,
-                         minimum_span_s: float = 0.50) -> bool:
-    """Require sustained LSTM evidence sampled over time, not adjacent frames."""
-    if fall_probability is not None and np.isfinite(fall_probability):
+def model_prediction_consensus(votes: deque[tuple[float, int, float]], prediction: int | None,
+                               confidence: float | None, timestamp_s: float,
+                               required: int, minimum_span_s: float,
+                               min_confidence: float = 0.65,
+                               sample_interval_s: float = 0.25) -> bool:
+    """Require the same LSTM class over time before comparing it with rules."""
+    if prediction is None or confidence is None or not np.isfinite(confidence) or confidence < min_confidence:
+        votes.clear()
+        return False
+    if votes and votes[-1][1] != int(prediction):
+        votes.clear()
+    if prediction is not None and confidence is not None and np.isfinite(confidence):
         if not votes or timestamp_s - votes[-1][0] >= sample_interval_s:
-            votes.append((timestamp_s, float(fall_probability)))
-    positive = [sample for sample in votes if sample[1] >= threshold]
-    return (len(positive) >= required and
-            positive[-1][0] - positive[0][0] >= minimum_span_s)
+            votes.append((timestamp_s, int(prediction), float(confidence)))
+    matching = [sample for sample in votes if prediction is not None and
+                sample[1] == prediction and sample[2] >= min_confidence]
+    return (len(matching) >= required and
+            matching[-1][0] - matching[0][0] >= minimum_span_s)
+
+
+class FallDecisionStream:
+    """Run the keypoint model and geometric rules as one ordered decision path."""
+
+    def __init__(self, settings: dict):
+        self.sequence: deque[list[float]] = deque(maxlen=40)
+        self.model_votes: deque[tuple[float, int, float]] = deque(maxlen=9)
+        self.postprocessor = configured_postprocessor()
+        self.latest_probability: float | None = None
+        self.latest_prediction: int | None = None
+        self.latest_model_confidence: float | None = None
+        self.last_valid_timestamp: float | None = None
+        self.settings = settings
+
+    def reset(self, timestamp_s: float) -> None:
+        self.sequence.clear()
+        self.model_votes.clear()
+        self.latest_probability = None
+        self.latest_prediction = None
+        self.latest_model_confidence = None
+        self.last_valid_timestamp = None
+        self.postprocessor.update(None, timestamp_s)
+
+    def update(self, keypoints, confidence, timestamp_s: float) -> dict:
+        if self.last_valid_timestamp is not None and timestamp_s - self.last_valid_timestamp > 2.0:
+            self.sequence.clear()
+            self.model_votes.clear()
+            self.latest_probability = None
+            self.latest_prediction = None
+            self.latest_model_confidence = None
+        self.last_valid_timestamp = timestamp_s
+        hold, speed_threshold, required_votes, required_span = detection_profile(self.settings)
+        self.postprocessor.lying_duration_s = hold
+        self.postprocessor.velocity_threshold = speed_threshold
+
+        # Stage 1: convert this valid pose into the same three features used at train time.
+        feature = extract_features(keypoints)
+        self.sequence.append(feature)
+        model_ready = len(self.sequence) == self.sequence.maxlen
+        probability = None
+        prediction = None
+        model_confidence = None
+        if model_ready:
+            window = torch.tensor(np.asarray(self.sequence, dtype=np.float32), dtype=torch.float32).unsqueeze(0).to(device)
+            with torch.no_grad():
+                probabilities = torch.softmax(fall_model(window), dim=1)[0]
+            probability = float(probabilities[1].item())
+            prediction = int(torch.argmax(probabilities).item())
+            model_confidence = float(probabilities[prediction].item())
+            self.latest_probability = probability
+            self.latest_prediction = prediction
+            self.latest_model_confidence = model_confidence
+        model_consensus = model_prediction_consensus(
+            self.model_votes, prediction, model_confidence, timestamp_s,
+            required=required_votes, minimum_span_s=required_span,
+            min_confidence=float(self.settings.get("lstm_confidence_threshold", 0.65)),
+        )
+
+        # Stage 2: evaluate geometry and movement from the same pose/timestamp.
+        geometry_state = self.postprocessor.update(keypoints, timestamp_s, confidence)
+        metrics = self.postprocessor.last_metrics
+        geometry_fall = geometry_state == "FALL"
+        model_predicts_fall = prediction == 1 if prediction is not None else None
+        agrees = model_consensus and model_predicts_fall is not None and model_predicts_fall == geometry_fall
+        confidence_threshold = float(self.settings.get("lstm_confidence_threshold", 0.65))
+        model_confident = model_confidence is not None and model_confidence >= confidence_threshold
+        if not model_ready:
+            final_state = "VERIFYING_FALL" if geometry_fall else geometry_state
+            if final_state == "NORMAL":
+                final_state = "WARMING_UP"
+            verdict = "PENDING"
+        elif not model_consensus:
+            final_state = "VERIFYING_FALL" if geometry_fall else "VERIFYING_MODEL"
+            verdict = "PENDING"
+        elif not agrees:
+            final_state = "UNCERTAIN"
+            verdict = "UNCERTAIN"
+        elif model_predicts_fall:
+            final_state = "FALL"
+            verdict = "FALL"
+        else:
+            final_state = geometry_state
+            verdict = "NO_FALL"
+
+        ratio = metrics.box_ratio if metrics else 0.0
+        horizontal = ratio >= self.postprocessor.aspect_ratio_threshold
+        analysis = {
+            "valid_keypoint": True,
+            "keypoint_frames": len(self.sequence),
+            "model_ready": model_ready,
+            "lstm_fall_probability": probability,
+            "lstm_prediction": "FALL" if prediction == 1 else "NO_FALL" if prediction == 0 else None,
+            "lstm_confidence": model_confidence,
+            "lstm_confident": model_confident,
+            "lstm_consensus": model_consensus,
+            "lstm_supports_fall": bool(model_consensus and prediction == 1),
+            "geometry_state": geometry_state,
+            "geometry_verdict": "FALL" if geometry_fall else "NO_FALL",
+            "algorithms_agree": agrees,
+            "horizontal_pose": horizontal,
+            "box_ratio": round(ratio, 3),
+            "trunk_tilt_degrees": round(metrics.trunk_tilt_degrees, 1) if metrics else None,
+            "downward_speed_body_heights_s": round(metrics.downward_speed_body_heights_s, 3) if metrics else None,
+            "rapid_descent": self.postprocessor.last_recent_fast_drop,
+            "horizontal_motion": self.postprocessor.last_horizontal_motion,
+            "horizontal_duration_s": round(metrics.horizontal_duration_s, 2) if metrics else 0.0,
+            "required_horizontal_duration_s": round(hold, 2),
+            "verdict": verdict,
+            "state": final_state,
+        }
+        if verdict == "FALL":
+            analysis["reason"] = ("LSTM và luật hình học cùng xác định FALL; "
+                                  f"độ tin cậy lớp LSTM {model_confidence:.1%}." )
+        elif verdict == "NO_FALL":
+            analysis["reason"] = ("LSTM và luật hình học cùng xác định NO_FALL; "
+                                  f"độ tin cậy lớp LSTM {model_confidence:.1%}.")
+        elif verdict == "UNCERTAIN":
+            analysis["reason"] = (f"Hai bộ phân tích chưa đồng thuận: LSTM={analysis['lstm_prediction']}, "
+                                  f"hình học={analysis['geometry_verdict']}. Chưa chốt FALL/NO_FALL.")
+        elif horizontal and not self.postprocessor.last_horizontal_motion and not self.postprocessor.last_recent_fast_drop:
+            analysis["reason"] = ("Tư thế nằm ngang đơn thuần chưa đủ kết luận ngã; chưa thấy cú rơi hoặc cử động khớp rõ. "
+                                  + ("LSTM chưa đủ 40 frame keypoint." if not model_ready else "Đang chờ LSTM ổn định và đối chiếu."))
+        elif horizontal and geometry_state != "FALL" and self.postprocessor.last_horizontal_motion and not self.postprocessor.last_recent_fast_drop:
+            analysis["reason"] = (f"Đã thấy cử động keypoint khi nằm ngang; cần giữ tư thế thêm để xác minh ({metrics.horizontal_duration_s:.1f}/{hold:.1f} giây). "
+                                  + ("LSTM chưa đủ 40 frame keypoint." if not model_ready else ""))
+        elif not model_ready:
+            analysis["reason"] = "Chưa đủ 40 khung hình keypoint hợp lệ để LSTM phân loại; luật hình học chưa xác nhận ngã."
+        elif not model_consensus:
+            analysis["reason"] = "LSTM chưa cho cùng một nhãn ổn định; đang tiếp tục phân tích và so sánh với luật hình học."
+        else:
+            analysis["reason"] = "Đang chờ luật hình học và LSTM cùng xác định một kết quả."
+        analysis["state"] = final_state
+        return {"state": final_state, "confidence": probability or 0.0, "analysis": analysis}
+
+
+def get_live_decision_stream(camera_id: str, settings: dict) -> FallDecisionStream:
+    stream = live_decision_streams.get(camera_id)
+    if stream is None:
+        stream = FallDecisionStream(settings)
+        live_decision_streams[camera_id] = stream
+    stream.settings = settings
+    return stream
 
 
 def validate_upper_body_keypoints(keypoints, confidence, threshold=0.35):
@@ -810,8 +998,25 @@ def draw_keypoints(frame, keypoints, fall=False):
         cv2.circle(frame, point, 4, color, -1, cv2.LINE_AA)
 
 
-def infer_primary_pose(frame):
+def infer_primary_pose(frame, camera_id: str | None = None, settings: dict | None = None):
     """Return only the selected person's (keypoints, confidence, bbox)."""
+    settings = settings if settings is not None else read_app_settings().get("ai", {})
+    zones = settings.get("camera_zones", {})
+    zone = zones.get(camera_id, {}) if isinstance(zones, dict) else {}
+    polygon = zone.get("points", []) if zone.get("mode") == "include" else []
+    center_region = PRIMARY_PERSON_CENTER_REGION
+    center_filter = None
+    if len(polygon) >= 3:
+        try:
+            points = [(float(point[0]), float(point[1])) for point in polygon]
+            if all(np.isfinite(point).all() and 0 <= point[0] <= 1 and 0 <= point[1] <= 1 for point in points):
+                xs, ys = zip(*points)
+                bounds = (min(xs), min(ys), max(xs), max(ys))
+                if bounds[0] < bounds[2] and bounds[1] < bounds[3]:
+                    center_region = bounds
+                    center_filter = lambda point: point_in_polygon(point, points)
+        except (TypeError, ValueError, IndexError):
+            center_filter = None
     if person_detector is not None:
         pose = infer_primary_person_pose(
             frame,
@@ -819,7 +1024,8 @@ def infer_primary_pose(frame):
             pose_model,
             pose_confidence=POSE_CANDIDATE_CONFIDENCE,
             selection_confidence=PRIMARY_PERSON_CONFIDENCE,
-            center_region=PRIMARY_PERSON_CENTER_REGION,
+            center_region=center_region,
+            center_filter=center_filter,
         )
         if pose is None:
             return None
@@ -832,7 +1038,8 @@ def infer_primary_pose(frame):
         result,
         frame.shape,
         confidence_threshold=PRIMARY_PERSON_CONFIDENCE,
-        center_region=PRIMARY_PERSON_CENTER_REGION,
+        center_region=center_region,
+        center_filter=center_filter,
     )
     if result.keypoints is None or selected is None or selected.index >= len(result.keypoints.xy):
         return None
@@ -863,66 +1070,51 @@ async def analyze_camera_frame(camera_id: str, file: UploadFile = File(...), aut
     frame_buffer = live_frame_buffers.setdefault(camera_id, deque(maxlen=90))
     frame_buffer.append((frame_timestamp, raw))
     camera_health_state[camera_id] = {"seen_at": time.monotonic(), "state": "PROCESSING", "fps": 0, "latency_ms": None}
-    primary_pose = infer_primary_pose(image)
+    primary_pose = infer_primary_pose(image, camera_id, ai_settings)
     if primary_pose is None:
-        live_sequences[camera_id] = []
-        live_model_votes.pop(camera_id, None)
-        live_geometric_fall_since.pop(camera_id, None)
-        live_postprocessors.setdefault(camera_id, configured_postprocessor()).update(None, time.monotonic())
+        stream = get_live_decision_stream(camera_id, ai_settings)
+        stream.reset(time.monotonic())
         ended = datetime.now(timezone.utc)
         elapsed = max((ended - started).total_seconds(), 1e-6)
         camera_health_state[camera_id] = {"seen_at": time.monotonic(), "state": "NO_PERSON", "fps": round(1 / elapsed, 2), "latency_ms": round(elapsed * 1000, 1)}
         current_status.update({"state": "NO_PERSON", "confidence": 0.0, "camera_id": camera_id, "fps": 0.0, "updated_at": ended.isoformat()})
-        return {"state": "NO_PERSON", "confidence": 0, "keypoints": []}
+        return {"state": "NO_PERSON", "confidence": 0, "keypoints": [],
+                "analysis": {"verdict": "NO_FALL", "state": "NO_PERSON", "reason": "Không phát hiện người hoặc pose để phân tích."}}
     keypoints, confidence, primary_bbox = primary_pose
+    if not person_in_configured_zone(camera_id, primary_bbox, image.shape, ai_settings):
+        stream = get_live_decision_stream(camera_id, ai_settings)
+        stream.reset(time.monotonic())
+        ended = datetime.now(timezone.utc)
+        elapsed = max((ended - started).total_seconds(), 1e-6)
+        camera_health_state[camera_id] = {"seen_at": time.monotonic(), "state": "OUTSIDE_ROI", "fps": round(1 / elapsed, 2), "latency_ms": round(elapsed * 1000, 1)}
+        current_status.update({"state": "OUTSIDE_ROI", "confidence": 0.0, "camera_id": camera_id, "fps": round(1 / elapsed, 2), "updated_at": ended.isoformat()})
+        return {"state": "OUTSIDE_ROI", "frame_state": "OUTSIDE_ROI", "confidence": 0,
+                "keypoints": keypoints.tolist(), "analysis": {"verdict": "NO_FALL", "state": "OUTSIDE_ROI",
+                "reason": "Người nằm ngoài vùng phân tích đã cấu hình."}}
     valid_pose, invalid_reason = validate_upper_body_keypoints(keypoints, confidence)
     if valid_pose:
         valid_pose, invalid_reason, _ = validate_person_box_and_hips(
             keypoints, confidence, image.shape, bbox_xyxy=primary_bbox
         )
     if not valid_pose:
-        processor = live_postprocessors.setdefault(camera_id, configured_postprocessor())
-        processor.lying_duration_s = min(30.0, max(1.0, float(ai_settings.get("fall_hold_seconds", 3))))
-        processor.velocity_threshold = max(0.35, 1.35 - min(0.95, max(0.2, float(ai_settings.get("sensitivity", 0.55)))))
-        state = processor.hold_state()
+        stream = get_live_decision_stream(camera_id, ai_settings)
+        state = stream.postprocessor.hold_state()
+        model_ready = len(stream.sequence) == stream.sequence.maxlen
+        analysis = {"valid_keypoint": False, "state": state, "verdict": "PENDING", "model_ready": model_ready,
+                    "lstm_fall_probability": stream.latest_probability,
+                    "reason": f"Keypoint frame không hợp lệ: {invalid_reason}. Bỏ qua frame để tránh đưa pose lỗi vào chuỗi."}
         ended = datetime.now(timezone.utc)
         elapsed = max((ended - started).total_seconds(), 1e-6)
         camera_health_state[camera_id] = {"seen_at": time.monotonic(), "state": state, "fps": round(1 / elapsed, 2), "latency_ms": round(elapsed * 1000, 1)}
         current_status.update({"state": state, "confidence": 0.0, "camera_id": camera_id,
                                "fps": 0.0, "updated_at": ended.isoformat()})
         return {"state": state, "frame_state": "INVALID_FRAME", "invalid_reason": invalid_reason,
-                "confidence": 0, "keypoints": keypoints.tolist()}
-    sequence = live_sequences.setdefault(camera_id, [])
-    sequence.append(extract_features(keypoints))
-    live_sequences[camera_id] = sequence[-40:]
-    votes = live_model_votes.setdefault(camera_id, deque(maxlen=5))
-    model_confidence = 0.0
-    fall_probability = None
-    if len(live_sequences[camera_id]) >= 40:
-        window = torch.tensor(np.array(live_sequences[camera_id][-40:]), dtype=torch.float32).unsqueeze(0).to(device)
-        with torch.no_grad():
-            probs = torch.softmax(fall_model(window), dim=1)[0]
-        pred = int(torch.argmax(probs).item())
-        model_confidence = float(probs[pred].item())
-        fall_probability = float(probs[1].item())
+                "confidence": 0, "keypoints": keypoints.tolist(), "analysis": analysis}
     now_monotonic = time.monotonic()
-    model_confirmed = model_fall_confirmed(votes, fall_probability, now_monotonic)
-    processor = live_postprocessors.setdefault(camera_id, configured_postprocessor())
-    processor.lying_duration_s = min(30.0, max(1.0, float(ai_settings.get("fall_hold_seconds", 3))))
-    processor.velocity_threshold = max(0.35, 1.35 - min(0.95, max(0.2, float(ai_settings.get("sensitivity", 0.55)))))
-    state = processor.update(keypoints, now_monotonic)
-    # Geometry confirms a rapid descent followed by a sustained horizontal
-    # pose; the temporal classifier must independently support that decision.
-    if state == "FALL":
-        fall_started = live_geometric_fall_since.setdefault(camera_id, now_monotonic)
-        # A disagreeing classifier may delay a strong geometric fall, but it
-        # cannot suppress an unchanged fall posture indefinitely.
-        if not model_confirmed and now_monotonic - fall_started < 2.0:
-            state = "BENDING"
-    else:
-        live_geometric_fall_since.pop(camera_id, None)
-    if state == "NORMAL" and len(live_sequences[camera_id]) < 40:
-        state = "WARMING_UP"
+    stream = get_live_decision_stream(camera_id, ai_settings)
+    decision = stream.update(keypoints, confidence, now_monotonic)
+    state = decision["state"]
+    model_confidence = decision["confidence"]
     event_id = None
     if state == "FALL":
         now = datetime.now(timezone.utc)
@@ -939,7 +1131,8 @@ async def analyze_camera_frame(camera_id: str, file: UploadFile = File(...), aut
     current_status.update({"state": state, "confidence": model_confidence, "fps": round(1 / elapsed, 2),
                            "camera_id": camera_id, "updated_at": ended.isoformat()})
     return {"state": state, "confidence": model_confidence, "keypoints": keypoints.tolist(),
-            "selected_bbox": list(primary_bbox), "skeleton": SKELETON, "event_id": event_id}
+            "selected_bbox": list(primary_bbox), "skeleton": SKELETON, "event_id": event_id,
+            "analysis": decision["analysis"]}
 
 
 @app.post("/api/analyze-video")
@@ -967,69 +1160,71 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
         cap.release()
         Path(video_file).unlink(missing_ok=True)
         raise HTTPException(500, "Unable to create annotated video")
-    sequence, predictions = [], []
-    model_votes: deque[tuple[float, float]] = deque(maxlen=5)
-    geometric_fall_since: float | None = None
-    postprocessor = configured_postprocessor()
+    predictions = []
+    ai_settings = read_app_settings().get("ai", {})
+    stream = FallDecisionStream(ai_settings)
     frame_index = 0
     pose_frame_count = 0
     bending_frame_count = 0
+    lying_frame_count = 0
+    verifying_frame_count = 0
     last_state, last_confidence = "NORMAL", 0.0
     try:
         while True:
             ok, frame = cap.read()
             if not ok:
                 break
-            primary_pose = infer_primary_pose(frame)
+            primary_pose = infer_primary_pose(frame, "uploaded_video", ai_settings)
             if primary_pose is not None:
                 keypoints, confidence, primary_bbox = primary_pose
+                if not person_in_configured_zone("uploaded_video", primary_bbox, frame.shape, ai_settings):
+                    stream.reset(frame_index / fps)
+                    last_state = "OUTSIDE_ROI"
+                    predictions.append({"frame": frame_index, "time": round(frame_index / fps, 2),
+                                        "state": last_state, "confidence": 0.0,
+                                        "analysis": {"valid_keypoint": False, "verdict": "PENDING", "state": last_state,
+                                                     "reason": "Người nằm ngoài vùng phân tích đã cấu hình."}})
+                    writer.write(frame)
+                    frame_index += 1
+                    continue
                 valid_pose, invalid_reason = validate_upper_body_keypoints(keypoints, confidence)
                 if valid_pose:
                     valid_pose, invalid_reason, _ = validate_person_box_and_hips(
                         keypoints, confidence, frame.shape, bbox_xyxy=primary_bbox
                     )
                 if not valid_pose:
-                    last_state = postprocessor.hold_state()
+                    last_state = stream.postprocessor.hold_state()
                     predictions.append({"frame": frame_index, "time": round(frame_index / fps, 2),
                                         "state": "INVALID_FRAME", "display_state": last_state,
-                                        "reason": invalid_reason, "confidence": 0.0})
+                                        "reason": invalid_reason, "confidence": 0.0,
+                                        "analysis": {"valid_keypoint": False, "verdict": "PENDING", "state": last_state,
+                                                     "model_ready": len(stream.sequence) == stream.sequence.maxlen,
+                                                     "reason": f"Keypoint frame không hợp lệ: {invalid_reason}."}})
                     writer.write(frame)
                     frame_index += 1
                     continue
                 pose_frame_count += 1
-                sequence.append(extract_features(keypoints))
-                sequence = sequence[-40:]
-                fall_probability = None
-                if len(sequence) >= 40:
-                    window = torch.tensor(np.array(sequence[-40:]), dtype=torch.float32).unsqueeze(0).to(device)
-                    with torch.no_grad():
-                        probs = torch.softmax(fall_model(window), dim=1)[0]
-                    pred = int(torch.argmax(probs).item())
-                    last_confidence = float(probs[pred].item())
-                    fall_probability = float(probs[1].item())
                 timestamp_s = frame_index / fps
-                model_confirmed = model_fall_confirmed(model_votes, fall_probability, timestamp_s)
-                last_state = postprocessor.update(keypoints, timestamp_s)
-                if last_state == "FALL":
-                    if geometric_fall_since is None:
-                        geometric_fall_since = timestamp_s
-                    if not model_confirmed and timestamp_s - geometric_fall_since < 2.0:
-                        last_state = "BENDING"
-                else:
-                    geometric_fall_since = None
+                decision = stream.update(keypoints, confidence, timestamp_s)
+                last_state = decision["state"]
+                last_confidence = decision["confidence"]
                 predictions.append({"frame": frame_index, "time": round(frame_index / fps, 2),
-                                    "state": last_state, "confidence": last_confidence})
+                                    "state": last_state, "confidence": last_confidence,
+                                    "analysis": decision["analysis"]})
                 if last_state == "BENDING":
                     bending_frame_count += 1
+                elif last_state == "LYING":
+                    lying_frame_count += 1
+                elif last_state == "VERIFYING_FALL":
+                    verifying_frame_count += 1
                 draw_keypoints(frame, keypoints, last_state == "FALL")
             else:
-                sequence.clear()
-                model_votes.clear()
-                geometric_fall_since = None
-                postprocessor.update(None, frame_index / fps)
+                stream.reset(frame_index / fps)
                 last_state = "NO_PERSON"
                 predictions.append({"frame": frame_index, "time": round(frame_index / fps, 2),
-                                    "state": last_state, "confidence": 0.0})
+                                    "state": last_state, "confidence": 0.0,
+                                    "analysis": {"valid_keypoint": False, "verdict": "PENDING", "state": last_state,
+                                                 "reason": "Không có người/pose hợp lệ trong frame này."}})
             if last_state == "FALL":
                 cv2.rectangle(frame, (0, 0), (width, 46), (30, 30, 210), -1)
                 cv2.putText(frame, f"FALL DETECTED  {last_confidence:.0%}", (14, 32),
@@ -1038,6 +1233,14 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
                 cv2.rectangle(frame, (0, 0), (width, 46), (0, 150, 220), -1)
                 cv2.putText(frame, "BENDING - CONTROLLED MOVEMENT", (14, 32),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
+            elif last_state == "LYING":
+                cv2.rectangle(frame, (0, 0), (width, 46), (0, 110, 90), -1)
+                cv2.putText(frame, "HORIZONTAL POSTURE - NO FALL CONFIRMED", (14, 32),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2, cv2.LINE_AA)
+            elif last_state == "VERIFYING_FALL":
+                cv2.rectangle(frame, (0, 0), (width, 46), (0, 150, 220), -1)
+                cv2.putText(frame, "VERIFYING FALL - COMBINING MODEL AND MOTION", (14, 32),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.62, (255, 255, 255), 2, cv2.LINE_AA)
             writer.write(frame)
             frame_index += 1
     finally:
@@ -1055,14 +1258,44 @@ async def analyze_video(file: UploadFile = File(...), authorization: str | None 
     if run:
         falls.extend(run)
     best = max(predictions, key=lambda item: item["confidence"], default={"confidence": 0.0, "time": None})
+    frame_analyses = [item["analysis"] for item in predictions if isinstance(item.get("analysis"), dict)]
+    model_probabilities = [float(item["lstm_fall_probability"]) for item in frame_analyses
+                           if item.get("lstm_fall_probability") is not None]
+    last_valid_analysis = next((item for item in reversed(frame_analyses) if item.get("valid_keypoint")), None)
+    last_verdict = last_valid_analysis.get("verdict") if last_valid_analysis else None
+    final_verdict = "FALL" if falls else last_verdict if last_verdict in {"NO_FALL", "UNCERTAIN"} else "UNCERTAIN"
+    if falls:
+        final_reason = next((item.get("reason") for item in frame_analyses
+                             if item.get("state") == "FALL" and item.get("reason")), "Đã đủ điều kiện xác nhận FALL.")
+    elif final_verdict == "UNCERTAIN" and not model_probabilities:
+        final_reason = "LSTM chưa đủ 40 frame keypoint hợp lệ nên chưa thể đối chiếu hai thuật toán; video chưa có kết luận cuối."
+    elif last_valid_analysis:
+        final_reason = last_valid_analysis.get("reason") or "Hai thuật toán chưa cùng đồng thuận; cần thêm dữ liệu."
+    else:
+        final_reason = "Không có frame keypoint hợp lệ để phân tích."
+    analysis_summary = {
+        "keypoint_frames": pose_frame_count,
+        "model_ready": bool(model_probabilities),
+        "model_ready_frames": sum(bool(item.get("model_ready")) for item in frame_analyses),
+        "model_max_fall_probability": max(model_probabilities, default=None),
+        "model_supports_fall": any(bool(item.get("lstm_supports_fall")) for item in frame_analyses),
+        "rapid_descent_seen": any(bool(item.get("rapid_descent")) for item in frame_analyses),
+        "horizontal_motion_seen": any(bool(item.get("horizontal_motion")) for item in frame_analyses),
+        "horizontal_frames": sum(bool(item.get("horizontal_pose")) for item in frame_analyses),
+        "max_horizontal_duration_s": max((float(item.get("horizontal_duration_s") or 0) for item in frame_analyses), default=0.0),
+        "required_horizontal_duration_s": round(detection_profile(ai_settings)[0], 2),
+        "verdict": final_verdict,
+        "reason": final_reason,
+    }
     if falls:
         await save_event(FallEvent(person_id="unknown", camera_id="uploaded_video",
                                      confidence=float(max(x["confidence"] for x in falls)),
                                      message="Ph\u00e1t hi\u1ec7n ng\u01b0\u1eddi t\u00e9 ng\u00e3 trong video t\u1ea3i l\u00ean"))
     timeline = predictions[::max(1, len(predictions)//100)]
-    return {"result": "FALL" if falls else "NO_FALL",
-            "postprocess_result": "FALL" if falls else "BENDING" if bending_frame_count else "NORMAL",
+    return {"result": final_verdict,
+            "postprocess_result": "FALL" if falls else final_verdict if final_verdict == "UNCERTAIN" else "VERIFYING_FALL" if verifying_frame_count else "BENDING" if bending_frame_count else "LYING" if lying_frame_count else "NORMAL",
             "confidence": best["confidence"],
+            "analysis_summary": analysis_summary,
             "detections": len(falls), "first_detection_time": falls[0]["time"] if falls else None,
             "duration": round(frame_count / fps, 2) if fps else 0,
             "pose_frames": pose_frame_count,
@@ -1184,8 +1417,10 @@ async def create_event(event: FallEvent, authorization: str | None = Header(defa
 async def save_event(event: FallEvent) -> dict:
     events = read_events()
     saved = {
-        "id": len(events) + 1,
+        "id": max((int(item.get("id", 0)) for item in events), default=0) + 1,
         **event.model_dump(),
+        "source": ("uploaded_video" if event.camera_id == "uploaded_video" else
+                   "manual" if event.camera_id == "manual" else "live_camera"),
         "created_at": datetime.now(timezone.utc).isoformat(),
         "acknowledged": False,
     }
