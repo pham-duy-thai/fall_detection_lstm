@@ -5,8 +5,8 @@ from ultralytics import YOLO
 
 model = YOLO("yolov8n-pose.pt")
 
-input_dir = "videos"
-output_dir = "data"
+input_dir = os.environ.get("KEYPOINT_INPUT_DIR", "videos")
+output_dir = os.environ.get("KEYPOINT_OUTPUT_DIR", "data")
 os.makedirs(output_dir, exist_ok=True)
 
 def extract_keypoints(video_path, save_path):
@@ -38,13 +38,18 @@ def extract_keypoints(video_path, save_path):
     except Exception as e:
         print(f"❌ Error saving {save_path}: {e}")
 
-for file in os.listdir(input_dir):
-    if file.endswith(".mp4"):
-        path = os.path.join(input_dir, file)
-        if file.startswith("fall"):
-            save = os.path.join(output_dir, file.replace(".mp4", "").replace("fall", "keypoints_fall") + ".npy")
-        elif file.startswith("nofall"):
-            save = os.path.join(output_dir, file.replace(".mp4", "").replace("nofall", "keypoints_nofall") + ".npy")
+for root, _, files in os.walk(input_dir):
+  for file in files:
+    if file.lower().endswith((".mp4", ".avi", ".mov", ".mkv")):
+        path = os.path.join(root, file)
+        stem = os.path.splitext(file)[0].lower()
+        parent = os.path.basename(root).lower()
+        if parent in ("fall", "nofall"):
+            stem = parent + "_" + stem
+        if stem.startswith("fall"):
+            save = os.path.join(output_dir, "keypoints_fall_" + os.path.splitext(file)[0] + ".npy")
+        elif stem.startswith("nofall"):
+            save = os.path.join(output_dir, "keypoints_nofall_" + os.path.splitext(file)[0] + ".npy")
         else:
             continue
         extract_keypoints(path, save)

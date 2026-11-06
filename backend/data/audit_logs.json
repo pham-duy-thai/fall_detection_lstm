@@ -1,0 +1,43 @@
+[
+  {
+    "action": "auth.login",
+    "detail": {
+      "user_id": "3a1b38130861aac040e45d64088071be",
+      "email": "admin@gmail.com"
+    },
+    "created_at": "2026-11-03T03:06:37.683429+00:00"
+  },
+  {
+    "action": "incident.updated",
+    "detail": {
+      "id": 16,
+      "status": "resolved"
+    },
+    "created_at": "2026-11-03T03:37:48.449464+00:00"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "user_id": "3a1b38130861aac040e45d64088071be",
+      "email": "admin@gmail.com"
+    },
+    "created_at": "2026-11-06T02:16:37.362534+00:00"
+  },
+  {
+    "action": "profile.avatar_updated",
+    "detail": {
+      "user_id": "3a1b38130861aac040e45d64088071be"
+    },
+    "created_at": "2026-11-06T02:17:04.774072+00:00"
+  },
+  {
+    "action": "profile.updated",
+    "detail": {
+      "user_id": "3a1b38130861aac040e45d64088071be",
+      "fields": [
+        "name"
+      ]
+    },
+    "created_at": "2026-11-06T02:17:06.972118+00:00"
+  }
+]

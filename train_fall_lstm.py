@@ -20,8 +20,11 @@ class FallDataset(torch.utils.data.Dataset):
 
 # Load data
 print("📥 Loading sequences and labels...")
-X = np.load("sequences.npy")
-y = np.load("labels.npy")
+sequence_path = os.environ.get("SEQUENCE_INPUT", "sequences.npy")
+label_path = os.environ.get("LABEL_INPUT", "labels.npy")
+model_path = os.environ.get("MODEL_OUTPUT", "lstm_fall_model.pth")
+X = np.load(sequence_path)
+y = np.load(label_path)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 train_loader = DataLoader(FallDataset(X_train, y_train), batch_size=16, shuffle=True)
@@ -31,8 +34,8 @@ model = LSTMClassifier(input_dim=3, hidden_dim=64, output_dim=2)
 
 # Load existing model if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-if os.path.exists("lstm_fall_model.pth"):
-    model.load_state_dict(torch.load("lstm_fall_model.pth", map_location=device))
+if os.path.exists(model_path) and os.environ.get("RESUME_TRAINING", "0") == "1":
+    model.load_state_dict(torch.load(model_path, map_location=device))
     print("🔁 Previous model loaded. Continuing training...")
 
 model.to(device)
@@ -79,5 +82,5 @@ acc = correct / total * 100
 print(f"\n📊 Final Test Accuracy: {acc:.2f}%")
 
 # Save model
-torch.save(model.state_dict(), "lstm_fall_model.pth")
+torch.save(model.state_dict(), model_path)
 print("✅ Model saved to lstm_fall_model.pth")

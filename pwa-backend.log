@@ -1,0 +1,862 @@
+INFO:     127.0.0.1:51386 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /css/style.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /css/pro.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /css/webcam.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /css/notifications.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /css/video-preview.css?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /login/style.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /css/auth.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /css/modal.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /css/settings.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /css/backgrounds.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /css/analytics.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /css/dashboard.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /css/header-actions.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /css/material.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /css/design.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /css/pwa.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /css/polish.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /assets/images/avatar/avatar-1.jpg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /js/navigation.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /assets/images/logo-icon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /js/camera.js?v=9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /js/camera-modal.js?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /js/webcam.js?v=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /js/notifications.js?v=5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /js/video-preview.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /js/auth.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /js/account.js?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /js/settings.js?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51386 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52945 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /js/header-actions.js?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /js/dashboard.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62057 - "GET /site.webmanifest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /login/images/summit.jpg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61311 - "GET /assets/images/favicon_io/favicon-32x32.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60613 - "GET /assets/images/favicon_io/apple-touch-icon.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57083 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET /css/design.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57083 - "GET /css/polish.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54826 - "GET /js/navigation.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65006 - "GET /js/auth.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58659 - "GET /js/camera.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65006 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61419 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64363 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64363 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64363 - "GET /js/auth.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62467 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64570 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64570 - "GET /sw.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61973 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61973 - "GET /css/design.css?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58798 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59120 - "GET /css/polish.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61717 - "GET /js/camera.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49985 - "GET /js/navigation.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49468 - "GET /js/webcam.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58798 - "GET /js/notifications.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59120 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61717 - "GET /js/auth.js?v=9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61973 - "GET /js/account.js?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49468 - "GET /js/dashboard.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61973 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61973 - "GET /assets/images/mau-background-dep-5.jpg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52196 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52196 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52196 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62164 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52196 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53575 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53575 - "GET /api/auth/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52196 - "GET /api/auth/requests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64059 - "GET /api/auth/requests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58766 - "POST /api/auth/users HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58766 - "GET /api/auth/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62098 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65421 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60390 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65421 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62098 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60390 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60390 - "POST /api/auth/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60390 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60390 - "GET /css/polish.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60390 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65421 - "GET /js/auth.js?v=9 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62098 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53349 - "GET /js/account.js?v=4 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53349 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53349 - "GET /assets/images/mau-background-dep-5.jpg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58334 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58334 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58334 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58334 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55999 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56687 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54504 - "GET /sw.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54923 - "POST /api/auth/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54923 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54923 - "GET /css/header-actions.css?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59589 - "GET /css/polish.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59828 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60917 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59650 - "GET /js/camera.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60115 - "GET /js/webcam.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54923 - "GET /js/notifications.js?v=5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59650 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59589 - "GET /js/auth.js?v=9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59828 - "GET /js/account.js?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60917 - "GET /js/dashboard.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60115 - "GET /js/header-actions.js?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60115 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60115 - "GET /assets/images/mau-background-dep-5.jpg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60115 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60115 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60115 - "GET /css/polish.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59828 - "GET /js/auth.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59589 - "GET /js/notifications.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60917 - "GET /js/header-actions.js?v=5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54923 - "GET /js/account.js?v=5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54923 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59589 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54923 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65429 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65429 - "GET /js/notifications.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63458 - "GET /js/auth.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62541 - "GET /js/account.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65429 - "GET /js/header-actions.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62541 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65429 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62541 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65429 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63458 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63458 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63458 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51712 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51712 - "GET /css/polish.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50814 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50814 - "GET /css/header-layout.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET /css/polish.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53417 - "GET /css/header-layout.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62157 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63212 - "GET /js/notifications.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57914 - "GET /js/auth.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58517 - "GET /js/account.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54220 - "GET /js/header-actions.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53417 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53417 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58517 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56289 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61254 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54637 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61254 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54637 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56289 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61254 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54637 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56289 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54637 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56289 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61254 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56289 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54637 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61254 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62574 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62574 - "GET /css/layout-fit.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62574 - "GET /js/notifications.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57987 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57987 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62872 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54728 - "GET /css/header-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57601 - "GET /css/layout-fit.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50873 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53931 - "GET /js/camera.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57987 - "GET /js/webcam.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62872 - "GET /js/notifications.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54728 - "GET /js/auth.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50873 - "GET /js/account.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57987 - "GET /js/dashboard.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53931 - "GET /js/header-actions.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62872 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53931 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62872 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53931 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57987 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52459 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52459 - "GET /css/header-layout.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64684 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64684 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60421 - "GET /css/header-layout.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58730 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /css/layout-fit.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /js/notifications.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64684 - "GET /js/auth.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /js/account.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /js/header-actions.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /css/header-layout.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50588 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57551 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60712 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56589 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56589 - "GET /js/auth.js?v=12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55674 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55674 - "GET /css/header-layout.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65318 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /css/layout-fit.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /js/camera.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61993 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /js/webcam.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /js/auth.js?v=12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55674 - "GET /js/notifications.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61993 - "GET /js/account.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /js/header-actions.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /js/dashboard.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56873 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49917 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62720 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62720 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62758 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62758 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62758 - "GET /js/header-actions.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62760 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50288 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50288 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57931 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60103 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59722 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59135 - "GET /js/notifications.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59826 - "GET /js/auth.js?v=12 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57931 - "GET /js/account.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60103 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59722 - "GET /js/header-actions.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60103 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59722 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59722 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60103 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57931 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64741 - "GET /api/auth/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54849 - "GET /api/auth/requests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62947 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62947 - "GET /css/auth.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58910 - "GET /css/account-pages.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59161 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56375 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60128 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60289 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59161 - "GET /js/navigation.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58910 - "GET /js/webcam.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62947 - "GET /js/camera.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60289 - "GET /js/notifications.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60128 - "GET /js/auth.js?v=12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56375 - "GET /js/account.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59161 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60289 - "GET /js/dashboard.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62947 - "GET /js/header-actions.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62947 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60289 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60128 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62947 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62947 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61832 - "POST /api/auth/avatar HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:61832 - "POST /api/auth/avatar HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:62246 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62246 - "GET /v1/usage/current HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60810 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62246 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60810 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62246 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60810 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60487 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60488 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60487 - "GET /v1/usage/current HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60488 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60499 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60487 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60488 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60487 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60488 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58788 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57814 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54158 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57814 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58788 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54158 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64935 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64935 - "GET /css/app-features.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50021 - "GET /css/account-pages.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65410 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56924 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54638 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59280 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50021 - "GET /js/navigation.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56924 - "GET /js/camera.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54638 - "GET /js/notifications.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64935 - "GET /js/webcam.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59280 - "GET /js/auth.js?v=12 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65410 - "GET /js/account.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64935 - "GET /js/header-actions.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50021 - "GET /js/dashboard.js?v=6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59280 - "GET /js/app-features.js?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54638 - "GET /js/analytics-pages.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50021 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54638 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59280 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50021 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54638 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51500 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:51500 - "GET /css/app-features.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50245 - "GET /js/navigation.js?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54912 - "GET /js/camera.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62803 - "GET /js/app-features.js?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56717 - "GET /js/dashboard.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56717 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54912 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56717 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54912 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62803 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54830 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54830 - "GET /css/account-pages.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54830 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62554 - "GET /css/app-features-extra.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /css/app-features.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55829 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60172 - "GET /css/app-features-media.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54830 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55829 - "GET /js/camera.js?v=12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /js/navigation.js?v=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /js/webcam.js?v=9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62554 - "GET /js/notifications.js?v=9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54830 - "GET /js/auth.js?v=13 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /js/account.js?v=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /js/analytics-pages.js?v=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /js/app-features.js?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /js/dashboard.js?v=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62554 - "GET /js/header-actions.js?v=6 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60172 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60172 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55866 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60172 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51546 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55866 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55866 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51546 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51546 - "GET /api/auth/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/auth/requests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49784 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49784 - "GET /css/account-pages.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49784 - "GET /css/app-features-extra.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55478 - "GET /css/app-features.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54591 - "GET /css/app-features-media.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52863 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59128 - "GET /css/carecam-md3-dark.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55478 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54591 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49784 - "GET /css/carecam-dark-fixes.css?v=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52863 - "GET /js/navigation.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /js/camera.js?v=12 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54591 - "GET /js/notifications.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55478 - "GET /js/webcam.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52863 - "GET /js/auth.js?v=13 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59128 - "GET /js/account.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49784 - "GET /js/app-features.js?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /js/analytics-pages.js?v=4 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52863 - "GET /js/dashboard.js?v=9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /js/header-actions.js?v=7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52863 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49784 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55478 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49784 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52863 - "GET /api/contacts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54591 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59128 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55478 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55478 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55478 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54591 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59128 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54591 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52863 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55478 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49784 - "GET /api/contacts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52863 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58791 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59128 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "POST /api/events/acknowledge-all HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:59128 - "POST /api/events/acknowledge-all HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:59128 - "POST /api/events/acknowledge-all HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:58791 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58791 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "POST /api/events/acknowledge-all HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:58791 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50064 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50274 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51528 - "GET /api/contacts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56653 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56653 - "GET /api/auth/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51528 - "GET /api/auth/requests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51528 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56653 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63602 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64771 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54731 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56257 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56257 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54731 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56257 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54731 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54731 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56257 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51294 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53911 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53911 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65368 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65368 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57105 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57105 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63102 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63102 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52668 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52668 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51855 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63432 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62137 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62137 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63432 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63432 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58507 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57008 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49628 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56908 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57644 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57644 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61779 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61779 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63963 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59926 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59926 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63963 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57621 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57621 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62685 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62685 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57621 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57847 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51348 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51348 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57847 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57834 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62885 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62885 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56450 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56450 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52134 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52134 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63525 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63525 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54220 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60657 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60657 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53887 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49216 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49216 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53194 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50753 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60362 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60362 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59829 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59829 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63203 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50571 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52799 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52799 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65276 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65276 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58914 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58914 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65276 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56814 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57729 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57729 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56814 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56814 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61562 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61562 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61817 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64732 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59827 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59827 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64732 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64732 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59827 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50953 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56467 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56467 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56467 - "GET /css/account-pages.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56467 - "GET /css/app-features.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50953 - "GET /css/app-features-extra.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50015 - "GET /css/app-features-media.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50187 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64275 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58327 - "GET /css/carecam-md3-dark.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /js/navigation.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56467 - "GET /css/carecam-dark-fixes.css?v=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64275 - "GET /js/camera.js?v=12 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50187 - "GET /js/webcam.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50015 - "GET /js/notifications.js?v=11 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /js/auth.js?v=13 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50187 - "GET /js/account.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64275 - "GET /js/analytics-pages.js?v=4 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58327 - "GET /js/app-features.js?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /js/dashboard.js?v=9 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50187 - "GET /js/header-actions.js?v=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58327 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50187 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50015 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50953 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50015 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64275 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50187 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56467 - "GET /api/contacts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58327 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50015 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64275 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64275 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64275 - "GET /js/notifications.js?v=11 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64275 - "GET /js/app-features.js?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64275 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58327 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50015 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50953 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50015 - "GET /api/cameras HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56467 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58327 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64275 - "GET /api/ai-settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50187 - "GET /api/contacts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56467 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58327 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50953 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61164 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52590 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57934 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52295 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56024 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63426 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /css/reset-base.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /css/account-pages.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /css/app-features.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59501 - "GET /css/app-features-extra.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /css/app-features-media.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /css/polish.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59501 - "GET /css/login-layout.css?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59501 - "GET /css/header-layout.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /css/layout-fit.css?v=2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /css/carecam-md3-dark.css?v=3 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /css/carecam-dark-fixes.css?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /css/responsive-fluid.css?v=7 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /js/time-format.js?v=1 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /js/navigation.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /js/camera.js?v=13 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /js/notifications.js?v=12 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /js/webcam.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /js/auth.js?v=13 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /js/account.js?v=8 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63426 - "GET /js/analytics-pages.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63059 - "GET /api/auth/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59501 - "GET /js/app-features.js?v=5 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55404 - "GET /js/dashboard.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55404 - "GET /js/header-actions.js?v=9 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55404 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63059 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59501 - "GET /assets/images/mau-background-dep-5.jpg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61732 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55374 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55374 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61732 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61732 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53372 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53372 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50814 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50814 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53458 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56780 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53543 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53543 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57009 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57009 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59177 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59177 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65263 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65263 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58184 - "GET /api/cameras/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64365 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55840 - "GET /api/cameras/health HTTP/1.1" 404 Not Found

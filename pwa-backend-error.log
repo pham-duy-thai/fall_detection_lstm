@@ -1,0 +1,202 @@
+INFO:     Started server process [21020]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56656 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59111 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:51723 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:53365 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:60062 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:51902 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:63629 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:57095 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:65130 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:51868 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59187 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52964 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:53221 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:62934 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:57469 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59914 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:61417 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:50709 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:56682 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:64359 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:61117 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:60261 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:55672 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:49239 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52019 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:58579 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:63032 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:58097 - "WebSocket /ws/events?token=Ik3j69vtY3QslblsMnTZpNvHXchis8YRC1S0hhfo_11DbxOsXAZLAcVHRH5KI56E" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49212 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:54105 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59801 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52274 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:57160 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:60475 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:53994 - "WebSocket /ws/events?token=aTfDow-4-hlUU3wGtJRp64-bGTbLbTchPQgGxdI9ntgWQcHTn0SIMf_Hz5qQ7uc6" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56119 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52171 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:64447 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59668 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:61867 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:56328 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:50648 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:49543 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:63719 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52075 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55987 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52807 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:62535 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:50980 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:61690 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:55197 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:53141 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:56052 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:55555 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:54365 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59554 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:58517 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:53334 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:62229 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:52439 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:58383 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:54054 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:51051 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55613 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:50873 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:55808 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:50987 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:62363 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59086 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:56835 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:49935 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:53395 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:56668 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:63958 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:60464 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:60567 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:58809 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:60894 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:57871 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:63794 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:58494 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:49840 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:65460 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:50527 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:62424 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:49529 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56177 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:59121 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52749 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:56082 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56979 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:57099 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:49454 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:50533 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:58140 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:55814 - "WebSocket /ws/events?token=3t1ieps_5xfMR1EAMfpzF4uuopQNKKebVtTuylm74ANRDQ-KIqx1ccbTMx5EawUl" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:57790 - "WebSocket /ws/events?token=bk3trzGiiowx8sjtl-dAamx2YxJPZ48Oxj5eHOiuOVVz_ngUO45xy75eT591Y1ML" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59717 - "WebSocket /ws/events?token=" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     127.0.0.1:63054 - "WebSocket /ws/events?token=bk3trzGiiowx8sjtl-dAamx2YxJPZ48Oxj5eHOiuOVVz_ngUO45xy75eT591Y1ML" [accepted]
+INFO:     connection open

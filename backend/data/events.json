@@ -1,0 +1,198 @@
+[
+  {
+    "id": 1,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9601550698280334,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-09T02:00:28.194366+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 2,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9601550698280334,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-09T02:10:43.064327+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 3,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9555814266204834,
+    "message": "Ph?t hi?n ng??i t? ng? trong video t?i l?n",
+    "created_at": "2026-10-12T01:28:34.568281+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 4,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9555814266204834,
+    "message": "Ph?t hi?n ng??i t? ng? trong video t?i l?n",
+    "created_at": "2026-10-12T01:29:08.510295+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 5,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9656000733375549,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:33:51.171302+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 6,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9656000733375549,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:34:59.015788+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 7,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9555814266204834,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:35:54.835675+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 8,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.900299608707428,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:38:13.735184+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 9,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.900299608707428,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:48:25.529859+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 10,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9359571933746338,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:51:40.231924+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 11,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.900299608707428,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T01:59:01.176466+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 12,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9359571933746338,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T02:00:41.952704+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 13,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.8760292530059814,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T02:06:21.476321+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 14,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.8379300236701965,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T02:08:58.375599+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 15,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9887519478797913,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T02:28:12.842210+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  },
+  {
+    "id": 16,
+    "person_id": "unknown",
+    "camera_id": "uploaded_video",
+    "confidence": 0.9887519478797913,
+    "message": "Phát hiện người té ngã trong video tải lên",
+    "created_at": "2026-10-12T02:39:27.759314+00:00",
+    "acknowledged": false,
+    "status": "resolved",
+    "note": "",
+    "updated_at": "2026-11-03T03:37:48.432861+00:00",
+    "updated_by": "3a1b38130861aac040e45d64088071be",
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
+  }
+]

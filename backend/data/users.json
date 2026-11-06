@@ -1,0 +1,21 @@
+[
+  {
+    "id": "3a1b38130861aac040e45d64088071be",
+    "email": "admin@gmail.com",
+    "name": "Admin",
+    "salt": "21b424770f9336af190ea87935a2beb2",
+    "password_hash": "ae2a5ff28a8c42757dccf5ab634dd72dadef07f971d72cbda9dbd4f0204a0142",
+    "created_at": "2026-10-12T00:47:36.979755+00:00",
+    "role": "admin",
+    "status": "approved",
+    "avatar_url": "/user-avatars/3a1b38130861aac040e45d64088071be.jpg"
+  },
+  {
+    "id": "ffe330c6e3be7a4fadcbe869f3cee756",
+    "email": "thai@gmail.com",
+    "name": "thai",
+    "salt": "d8ae861c1924c69c70d0db4a0b8b67eb",
+    "password_hash": "b5550e45624c26640d74cabea889ea26d91d4b547819335218d586e05e966d29",
+    "created_at": "2026-11-03T01:56:11.988137+00:00"
+  }
+]

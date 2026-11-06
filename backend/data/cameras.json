@@ -1,0 +1,9 @@
+[
+  {
+    "id": "camera_01",
+    "name": "Camera phòng khách",
+    "source": "0",
+    "location": "Phòng khách",
+    "enabled": false
+  }
+]

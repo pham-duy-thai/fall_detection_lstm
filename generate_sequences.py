@@ -33,8 +33,11 @@ def build_sequences(path, label, window=40, stride=5):
         return np.array([]), np.array([])
 
 X_all, y_all = [], []
-for file in os.listdir("data"):
-    path = os.path.join("data", file)
+data_dir = os.environ.get("KEYPOINT_OUTPUT_DIR", "data")
+sequence_output = os.environ.get("SEQUENCE_OUTPUT", "sequences.npy")
+label_output = os.environ.get("LABEL_OUTPUT", "labels.npy")
+for file in os.listdir(data_dir):
+    path = os.path.join(data_dir, file)
     if file.startswith("keypoints_fall"):
         X, y = build_sequences(path, 1)
     elif file.startswith("keypoints_nofall"):
@@ -47,8 +50,8 @@ for file in os.listdir("data"):
 
 X_all = np.concatenate(X_all)
 y_all = np.concatenate(y_all)
-np.save("sequences.npy", X_all)
-np.save("labels.npy", y_all)
+np.save(sequence_output, X_all)
+np.save(label_output, y_all)
 
 print(f"✅ Total sequences: {len(X_all)}")
 print(f"✅ Label distribution: {dict(zip(*np.unique(y_all, return_counts=True)))}")
