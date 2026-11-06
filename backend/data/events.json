@@ -194,5 +194,17 @@
     "acknowledged_by": [
       "3a1b38130861aac040e45d64088071be"
     ]
+  },
+  {
+    "id": 17,
+    "person_id": "unknown",
+    "camera_id": "manual",
+    "confidence": 0.0,
+    "message": "Báo động khẩn cấp thủ công từ Live Dashboard",
+    "created_at": "2026-11-06T02:33:32.268917+00:00",
+    "acknowledged": false,
+    "acknowledged_by": [
+      "3a1b38130861aac040e45d64088071be"
+    ]
   }
 ]

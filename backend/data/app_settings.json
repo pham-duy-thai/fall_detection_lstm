@@ -1,0 +1,20 @@
+{
+  "ai": {
+    "fall_hold_seconds": 3,
+    "sensitivity": 0.5,
+    "schedule_enabled": false,
+    "schedule_start": "00:00",
+    "schedule_end": "23:59",
+    "show_skeleton": true,
+    "show_boxes": true,
+    "ignore_zones": [],
+    "priority_camera": null
+  },
+  "contacts": [],
+  "channels": {
+    "push": true,
+    "sms": false,
+    "call": false,
+    "zalo": false
+  }
+}
